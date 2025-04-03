@@ -41,13 +41,25 @@ cur.execute(
 conn.commit()
 
 # Теперь приступаем к операциям вставок данных
-for row in customers_data:
-    query = f'INSERT INTO customers ("customer_id", "company_name", "contact_name") VALUES ({", ".join(["%s"] * len(row))}) RETURNING "customer_id", "company_name", "contact_name"'
-    print(row)
-    cur.execute(query, row)
+
+# for row in customers_data:
+#     query = f'INSERT INTO customers ("customer_id", "company_name", "contact_name") VALUES ({", ".join(["%s"] * len(row))}) RETURNING "customer_id", "company_name", "contact_name"'
+#     print(row)
+#     cur.execute(query, row)
+
+# conn.commit()
+# print(cur.fetchone())
+
+# А можно и так:
+for customer in customers_data:
+    cur.execute(
+        f'INSERT INTO customers ("customer_id", "company_name", "contact_name") VALUES ({", ".join(["%s"] * len(customer))}) RETURNING *',
+        customer
+    )
 
 conn.commit()
 print(cur.fetchone())
+
 
 for row in employees_data:
     query = f'INSERT INTO employees ("first_name", "last_name", "title", "birth_date", "notes") VALUES ({", ".join(["%s"] * len(row))}) RETURNING *'

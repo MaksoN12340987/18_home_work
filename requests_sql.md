@@ -70,11 +70,20 @@ SELECT <название_колонки>, <перемножит> * <колонк
 FROM table_name
 ```
 ### DISTINCT — оператор, который используется для выбора уникальных значений из столбца таблицы
+#### LIMIT - лимит вывода строк
 ```
-SELECT DISTINCT country FROM employees;
+SELECT DISTINCT country 
+FROM employees
+;
 ```
 
 ## Выборка с условием
+#### ORDER BY — оператор, который используется для фильтрации по возврастанию, а если DESC - по убыванию.
+```
+SELECT * FROM table_name 
+ORDER BY colum_name DESC;
+```
+
 #### WHERE — оператор, который используется для фильтрации строк по определенным условиям.
 ```
 SELECT * FROM table_name WHERE colum_name = 'France';
@@ -91,5 +100,13 @@ WHERE unit_price BETWEEN 30 AND 50;
 SELECT * FROM orders
 WHERE ship_country IN ('France', 'Germany');
 ```
+
+#### LIKE - задаёт шаблон для поиска '_' - одна буква, '%' - любое кол-во букв
+```
+SELECT colum_name 
+FROM table_name
+WHERE colum_name LIKE '_а%';
+```
+
 
 https://github.com/pthom/northwind_psql/blob/master/northwind.sql
